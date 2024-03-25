@@ -9,7 +9,7 @@ const client = axios.create({
 });
 
 export default {
-  searchVideos(query, perPage = 15) {
+  searchVideos(query, perPage = 30) {
     return client.get('search', { params: { query, per_page: perPage } });
   },
 };
