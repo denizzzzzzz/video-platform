@@ -33,6 +33,19 @@ function selectVideo(video) {
   const videoData = JSON.stringify(video);
   sessionStorage.setItem('currentVideo', videoData);
 }
+function createTitle(url){
+  const urlObj = new URL(url);
+  const path = urlObj.pathname.replace(/^\/|\/$/g, '');
+  const titlePattern = path.match(/video\/(.*?)(-\d+)?\/?$/);
+  if (titlePattern && titlePattern[1]) {
+    return titlePattern[1]
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  } else {
+    return "Video Title";
+  }
+}
 
 </script>
 
@@ -41,12 +54,15 @@ function selectVideo(video) {
     <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 p-4">
       <div v-for="video in videos" :key="video.id" class="video" @click="selectVideo(video)">
         <div class="w-full overflow-hidden h-32 bg-black">
-          <video class="w-full h-full object-cover cursor-pointer opacity-80 hover:opacity-100 transition-opacity duration-300 ease-in-out" :poster="video.video_pictures[4].picture" muted
-          @mouseenter="startPreview"
-          @mouseleave="stopPreview">
-            <source :src="video.video_files[0].link" type="video/mp4">
-          </video>
+          <router-link to="/video">
+            <video class="w-full h-full object-cover cursor-pointer opacity-80 hover:opacity-100 transition-opacity duration-300 ease-in-out" :poster="video.video_pictures[4].picture" muted
+            @mouseenter="startPreview"
+            @mouseleave="stopPreview">
+              <source :src="video.video_files[0].link" type="video/mp4">
+            </video>
+          </router-link>
         </div>
+        <h3 class="text-center mt-4 text-lg text-white">{{ createTitle(video.url) }}</h3>
       </div>
     </div>
   </div>

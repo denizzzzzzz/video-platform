@@ -18,7 +18,6 @@ import './assets/main.css'
   </header>
     <router-view />
 </template>
-
 <style scoped>
 
 </style>
