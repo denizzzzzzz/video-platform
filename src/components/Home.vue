@@ -27,12 +27,19 @@ function stopPreview(event) {
   videoElement.pause();
   videoElement.currentTime = 0;
 }
+
+function selectVideo(video) {
+  sessionStorage.removeItem('currentVideo');
+  const videoData = JSON.stringify(video);
+  sessionStorage.setItem('currentVideo', videoData);
+}
+
 </script>
 
 <template>
   <div class="w-2/3 mx-auto">
     <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 p-4">
-      <div v-for="video in videos" :key="video.id" class="video">
+      <div v-for="video in videos" :key="video.id" class="video" @click="selectVideo(video)">
         <div class="w-full overflow-hidden h-32 bg-black">
           <video class="w-full h-full object-cover cursor-pointer" :poster="video.video_pictures[4].picture" muted
           @mouseenter="startPreview"
@@ -44,4 +51,3 @@ function stopPreview(event) {
     </div>
   </div>
 </template>
-
