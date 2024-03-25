@@ -6,7 +6,7 @@ const videos = ref([]);
 console.log(videos)
 const fetchVideos = async () => {
   try {
-    const response = await VideoApiService.searchVideos('Code');
+    const response = await VideoApiService.searchVideos('animals');
     videos.value = response.data.videos;
    
   } catch (error) {
@@ -41,7 +41,7 @@ function selectVideo(video) {
     <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 p-4">
       <div v-for="video in videos" :key="video.id" class="video" @click="selectVideo(video)">
         <div class="w-full overflow-hidden h-32 bg-black">
-          <video class="w-full h-full object-cover cursor-pointer" :poster="video.video_pictures[4].picture" muted
+          <video class="w-full h-full object-cover cursor-pointer opacity-80 hover:opacity-100 transition-opacity duration-300 ease-in-out" :poster="video.video_pictures[4].picture" muted
           @mouseenter="startPreview"
           @mouseleave="stopPreview">
             <source :src="video.video_files[0].link" type="video/mp4">

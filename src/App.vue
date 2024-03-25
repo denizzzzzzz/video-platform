@@ -1,6 +1,6 @@
 <script setup>
-import Home from './components/Home.vue'
 import './assets/main.css'
+
 </script>
 
 <template>
@@ -16,11 +16,9 @@ import './assets/main.css'
         </div>
     </div>
   </header>
-
-  <main>
-    <Home />
-  </main>
+    <router-view />
 </template>
 
 <style scoped>
+
 </style>
