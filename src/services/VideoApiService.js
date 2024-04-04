@@ -12,4 +12,7 @@ export default {
   searchVideos(query, perPage = 30) {
     return client.get('search', { params: { query, per_page: perPage } });
   },
+  getVideoById(videoId) {
+    return client.get(`videos/${videoId}`);
+  },
 };

@@ -3,8 +3,17 @@ import Home from '../components/Home.vue';
 import VideoDetails from '../components/VideoDetails.vue';
 
 const routes = [
-  { path: '/', component: Home },
-  { path: '/video', component: VideoDetails },
+  {
+    path: '/',
+    component: Home,
+    name: 'homepage'
+  },
+  {
+    path: '/video/:videoId',
+    component: VideoDetails,
+    props: true,
+    name: 'VideoDetails', 
+  },
 ];
 
 const router = createRouter({
